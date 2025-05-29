@@ -36,3 +36,22 @@ export async function convertCurrency(req: Request, res: Response) {
     return;
   }
 }
+
+export async function listTransactions(req: Request, res: Response) {
+  try {
+    const userId = req.user?.id;
+
+    if (!userId) {
+      res.status(401).json({ error: "Unauthorized user" });
+      return;
+    }
+
+    const transactions = await TransactionService.getUserTransactions(userId);
+    res.json(transactions);
+    return;
+  } catch (error: any) {
+    console.error("[List Transactions Error]", error.message);
+    res.status(500).json({ error: "Internal server error" });
+    return;
+  }
+}

@@ -38,4 +38,21 @@ export class TransactionService {
       timestamp: saved.timestamp.toISOString(),
     };
   }
+  static async getUserTransactions(userId: number) {
+    const results = await prisma.transaction.findMany({
+      where: { userId },
+      orderBy: { timestamp: "desc" },
+    });
+
+    return results.map((t: any) => ({
+      transactionId: t.id,
+      userId: t.userId,
+      fromCurrency: t.fromCurrency,
+      toCurrency: t.toCurrency,
+      fromValue: t.fromValue,
+      toValue: t.toValue,
+      rate: t.rate,
+      timestamp: t.timestamp.toISOString(),
+    }));
+  }
 }
