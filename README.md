@@ -11,6 +11,8 @@ This project was built to convert currencies between different countries and sto
 - Express
 - Prisma ORM
 - PostgreSQL
+- Zod (data validations)
+- Pino (structured logs)
 - Swagger (API documentation)
 - Jest + Supertest (for tests)
 - Render (for deployment)
@@ -91,6 +93,14 @@ cd CurrencyConverterAPI
 npm install
 ```
 
+### 3. Configure the database with Docker
+
+> You must have Docker installed.
+
+```bash
+docker-compose up -d
+```
+
 ### 3. Configure environment variables
 
 Create a `.env` file based on `.env.example`:
@@ -145,6 +155,7 @@ npm run start
 
 5. Add environment variables
 6. Access the generated URL to test
+7. Already deployed on Render: https://currencyconverterapi-d27q.onrender.com (may take a few seconds to load on the free plan)
 
 ---
 
