@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { ApiError } from "../utils/ApiError";
+import { logger } from "../utils/logger";
 
 export function errorHandler(
   err: any,
@@ -11,10 +12,11 @@ export function errorHandler(
   const message =
     err instanceof ApiError ? err.message : "Internal server error";
 
-  console.error("[Error Handler]", {
+  logger.error({
     path: req.path,
     method: req.method,
-    message: err.message,
+    statusCode,
+    message,
     stack: err.stack,
   });
 
