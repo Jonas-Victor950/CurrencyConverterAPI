@@ -5,6 +5,8 @@ import cors from "cors";
 import { fakeUser } from "./middlewares/fakeUser";
 import { ExchangeService } from "./modules/exchange/exchange.service";
 import transactionRoutes from "./modules/transactions/routes";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger";
 
 const app = express();
 
@@ -27,5 +29,6 @@ app.get("/test-rate", async (req: Request, res: Response) => {
 });
 
 app.use("/api", transactionRoutes);
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 export default app;
