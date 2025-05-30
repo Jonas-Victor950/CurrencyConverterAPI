@@ -7,6 +7,7 @@ import { ExchangeService } from "./modules/exchange/exchange.service";
 import transactionRoutes from "./modules/transactions/routes";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./config/swagger";
+import { errorHandler } from "./middlewares/errorHandler";
 
 const app = express();
 
@@ -30,5 +31,6 @@ app.get("/test-rate", async (req: Request, res: Response) => {
 
 app.use("/api", transactionRoutes);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use(errorHandler);
 
 export default app;
